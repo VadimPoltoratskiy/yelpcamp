@@ -82,14 +82,13 @@ router.put("/:id", middleware.checkCampgroundOwnership, function (req, res) {
 
 //Delete Campground route
 
-router.delete("/:id", middleware.checkCampgroundOwnership, function (req, res) {
-    Campground.findOneAndDelete(req.params.id, function (err) {
-        if (err) {
-            console.log(err);
+router.delete("/:id", middleware.checkCampgroundOwnership, function (req, res, next) {
+    Campground.findById(req.params.id, function (err, campground) {
+        if (err) return next(err);
+            campground.remove();
+            req.flash("success", "Campground successfully deleted!");
             res.redirect("/campgrounds");
-        } else {
-            res.redirect("/campgrounds");
-        }
+        
     });
 });
 
