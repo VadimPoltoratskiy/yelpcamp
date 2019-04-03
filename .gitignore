@@ -8,6 +8,7 @@
 .DS_Store
 .AppleDouble
 .LSOverride
+nodemon.json
 
 # Icon must end with two \r
 Icon
